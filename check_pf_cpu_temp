@@ -2,6 +2,7 @@
 #
 # Dallas Haselhorst 9May2018
 #
+CEL=$'\xc2\xb0'C
 
 if [ "$1" = "-w" ] && [ "$2" -gt "0" ] && [ "$3" = "-c" ] && [ "$4" -gt "0" ] ; then
         warn=$2
@@ -18,19 +19,19 @@ if [ "$1" = "-w" ] && [ "$2" -gt "0" ] && [ "$3" = "-c" ] && [ "$4" -gt "0" ] ; 
 
         if [ $CPUTEMP -ge $warn ];then
                 if [ $CPUTEMP -ge $crit ]; then
-                echo "CRITICAL - CPU temperature - $CPUTEMP (C)|TEMP=$CPUTEMP;;;;"
+                echo "CRITICAL - CPU temperature - $CPUTEMP$CEL |TEMP=$CPUTEMP$CEL;;;;"
                 exit 2
                 else
-                echo "WARNING - CPU temperature = $CPUTEMP (C)|TEMP=$CPUTEMP;;;;"
+                echo "WARNING - CPU temperature = $CPUTEMP$CEL |TEMP=$CPUTEMP$CEL;;;;"
                 exit 1
                 fi
         else
-                echo "OK - CPU temperature = $CPUTEMP (C)|TEMP=$CPUTEMP;;;;"
+                echo "OK - CPU temperature = $CPUTEMP$CEL |TEMP=$CPUTEMP$CEL;;;;"
                 exit 0
         fi
 
 else
-        echo "check_pf_cpu_temp - Nagios Plugin for checking CPU temp on pfSense"
+        echo "check_pf_cpu_temp - Nagios Plugin for checking CPU temp on PF/OPNSense"
         echo "*** Only returns value of 1st CPU core if there are multiple ***  "
         echo ""
         echo "Usage:    check_pf_cpu_temp -w <warnlevel> -c <critlevel>"
